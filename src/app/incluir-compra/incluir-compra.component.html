@@ -1,0 +1,44 @@
+<po-page-default
+[p-actions]="actions"
+[p-breadcrumb]="breadcrumb"
+p-title="Insira os itens da compra">
+
+  <div class="po-row po-mt-2">
+    <po-input
+      class="po-xl-3 po-md-4 po-lg-4 po-sm-12"
+      p-label="Código do produto"
+      p-focus="true"
+      p-error-pattern="Campo obrigatório"
+      p-maxlength="5"
+      name="nomeDoProduto"
+      p-placeholder="apenas números"
+      t-required="true" >
+    </po-input>
+
+    <po-input
+      class="po-ml-2 po-xl-4 po-md-4 po-lg-4 po-sm-12"
+      p-label="Quantidade"
+      p-focus="true"
+      p-error-pattern="Campo obrigatório"
+      p-maxlength="5"
+      name="QuantidadeDoProduto"
+      p-placeholder="apenas números"
+      t-required="true" >
+    </po-input>
+
+    <po-button
+      class="po-ml-2 po-mt-4"
+      (p-click)="oi"
+      p-icon="po-icon-plus-circle"
+      p-type="link" >
+    </po-button>
+
+    <po-button
+      class="po-ml-2 po-mt-4"
+      (p-click)="oi"
+      p-icon="po-icon-delete"
+      p-type="link" >
+    </po-button>
+  </div>
+
+</po-page-default>

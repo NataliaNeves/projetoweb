@@ -1,0 +1,22 @@
+<po-page-default
+[p-actions]="actions"
+[p-breadcrumb]="breadcrumb"
+p-title="Opções produto">
+
+    <div class="thf-row">
+        <po-widget
+        class="po-xl-6 po-lg-6 po-md-6 po-sm-12 po-mt-2"
+        (p-click)="navegar()">
+            <p class="po-text-center po-font-subtitle po-mt-3 po-mb-3 po-text-color-06">
+                Incluir
+            </p>
+        </po-widget>
+        <po-widget
+        class="po-xl-6 po-lg-6 po-md-6 po-sm-12 po-mt-2"
+        (p-click)="navegarAlterar()">
+            <p class="po-text-center po-font-subtitle po-mt-3 po-mb-3 po-text-color-06">
+                Alterar
+            </p>
+        </po-widget>
+    </div>
+</po-page-default>
