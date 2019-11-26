@@ -15,6 +15,7 @@ import { IProduto } from './produto-incluir.interface';
 export class ProdutoIncluirComponent implements OnInit {
 
   public nome = '';
+  public fornecedor = '';
   public quantidade = null;
   public precoCompra = null;
   public precoVenda = null;
@@ -47,6 +48,7 @@ export class ProdutoIncluirComponent implements OnInit {
     const incluirProduto: ProdutoIncluir = {
 
       nome: this.nome,
+      fornecedor: this.fornecedor,
       quantidade: this.quantidade,
       precoCompra: this.precoCompra,
       precoVenda: this.precoVenda

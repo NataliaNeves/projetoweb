@@ -2,6 +2,7 @@ import { IProduto } from './produto-incluir.interface';
 
 export class ProdutoIncluir {
     codigo?: number;
+    fornecedor: string;
     nome: string;
     quantidade: number;
     precoCompra: number;
@@ -9,6 +10,7 @@ export class ProdutoIncluir {
 
     constructor ( produto: IProduto) {
         this.codigo = produto.id;
+        this.fornecedor = produto.fornecedor;
         this.nome = produto.nome;
         this.quantidade = produto.quantidade;
         this.precoCompra = produto.precoCompra;
