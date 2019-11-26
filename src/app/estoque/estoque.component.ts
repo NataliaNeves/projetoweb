@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { PoPageAction, PoBreadcrumb, PoTableColumn, PoSelectOption } from '@portinari/portinari-ui';
-import { SamplePoTableTransportService } from './sample-po-table-transport.service';
+import { EstoqueService } from './estoque.service';
 
 
 @Component({
   selector: 'app-estoque',
   templateUrl: './estoque.component.html',
   styleUrls: ['./estoque.component.css'],
-  providers: [ SamplePoTableTransportService ]
+  providers: [ EstoqueService ]
 })
 export class EstoqueComponent implements OnInit {
 
@@ -26,12 +26,14 @@ export class EstoqueComponent implements OnInit {
   items: Array<any>;
 
   constructor(
-    private transportService: SamplePoTableTransportService
+    private transportService: EstoqueService
   ) { }
 
   ngOnInit() {
     this.columns = this.transportService.getColumns();
-    this.items = this.transportService.getItems();
+    this.transportService.getItems().subscribe((produtos) => {
+      this.items = produtos;
+    });
   }
 
   isUndelivered(row, index: number) {

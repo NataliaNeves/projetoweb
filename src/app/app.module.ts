@@ -12,6 +12,8 @@ import { FornecedoresComponent } from './fornecedores/fornecedores.component';
 import { ProdutoComponent } from './produto/produto.component';
 import { ProdutoIncluirComponent } from './produto/produto-incluir/produto-incluir.component';
 import { ProdutoAlterarComponent } from './produto/produto-alterar/produto-alterar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,10 +27,13 @@ import { ProdutoAlterarComponent } from './produto/produto-alterar/produto-alter
     ProdutoAlterarComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     PoModule,
     RouterModule.forRoot([]),
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,18 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { PoPageAction, PoBreadcrumb, PoTableColumn } from '@portinari/portinari-ui';
-import { SamplePoTableTransportAlterarService } from './sample-po-table-transport-alterar.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { PoPageAction, PoBreadcrumb, PoTableColumn, PoTableAction, PoModalComponent, PoModalAction, PoNotificationService } from '@portinari/portinari-ui';
+import { Router } from '@angular/router';
+import { ProdutoIncluir } from '../produto-incluir/produto-incluir.entity';
+import { IProduto } from '../produto-incluir/produto-incluir.interface';
+import { HttpClient } from '@angular/common/http';
+import { EstoqueService } from '../../estoque/estoque.service';
 
 
 @Component({
   selector: 'app-produto-alterar',
   templateUrl: './produto-alterar.component.html',
   styleUrls: ['./produto-alterar.component.css'],
-  providers: [ SamplePoTableTransportAlterarService ]
+  providers: [EstoqueService]
 })
 export class ProdutoAlterarComponent implements OnInit {
 
+  @ViewChild('modal', {static: false})
+  public modal: PoModalComponent;
+
+  public produto = {
+    produto: '',
+    quantidade: 0
+  };
+
+  close: PoModalAction = {
+    action: () => {
+      this.modal.close();
+    },
+    label: 'Cancelar',
+    danger: true
+  };
+
+  confirm: PoModalAction = {
+    action: this.salvar.bind(this),
+    label: 'Salvar'
+  };
+
   public readonly actions: Array<PoPageAction> = [
-    { label: 'Cancelar', url: '/home' },
+    { label: 'Voltar', url: '/home' },
   ];
 
   public readonly breadcrumb: PoBreadcrumb = {
@@ -22,20 +47,72 @@ export class ProdutoAlterarComponent implements OnInit {
     ]
   };
 
+  actionsTable: Array<PoTableAction> = [
+    { action: this.abrirModal.bind(this), label: 'Alterar' },
+    { action: this.deletar.bind(this), label: 'Deletar' }
+  ];
+
   columns: Array<PoTableColumn>;
   items: Array<any>;
 
   constructor(
-    private transportService: SamplePoTableTransportAlterarService
+    public router: Router,
+    private estoqueService: EstoqueService,
+    private http: HttpClient,
+    public poNotification: PoNotificationService
   ) { }
 
   ngOnInit() {
-    this.columns = this.transportService.getColumns();
-    this.items = this.transportService.getItems();
+    this.columns = this.estoqueService.getColumns();
+    this.estoqueService.getItems().subscribe(produtos => {
+      this.items = produtos;
+    });
+  }
+
+  abrirModal(row) {
+    
+    this.produto = row;
+    this.modal.open();
+  }
+
+  salvar() {
+
+    const valorAlteracao: IProduto = {
+  
+      ProviderId: this.produto['codigo'],
+      Name: this.produto.produto,
+      Quantity: this.produto.quantidade,
+      PurchasePrice: this.produto['precoCompra'],
+      SellPrice: this.produto['precoVenda']
+    
+    }
+
+    this.http.put('https://localhost:44369/api/Product', valorAlteracao).subscribe(() => {
+      this.poNotification.success('Produto alterado com sucesso!');
+      this.modal.close();
+    }, (erro) => {
+      this.poNotification.error(erro);
+    });
+
+  }
+
+  deletar(row) {
+    this.http.delete(`https://localhost:44369/api/{Product}/${row.codigo}`).subscribe(() => {
+      this.estoqueService.getItems().subscribe((produtos) => {
+        this.poNotification.success('Produto deletado com sucesso!');
+        this.items = produtos;
+      });
+    }, (erro) => {
+      this.poNotification.error(erro);
+    });
   }
 
   isUndelivered(row, index: number) {
     return row.status !== 'delivered';
+  }
+
+  navegarAlterar() {
+    this.router.navigateByUrl('');
   }
 
 }

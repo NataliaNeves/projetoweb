@@ -6,7 +6,39 @@ p-title="Alterar produto">
 <po-table
   [p-columns]="columns"
   [p-items]="items"
+  [p-actions]="actionsTable"
   p-sort="true"
   [p-striped]="true">
 </po-table>
+
+<po-modal #modal
+  p-title="Portinari Modal"
+  [p-primary-action]="confirm"
+  [p-secondary-action]="close">
+      <po-input
+        [(ngModel)]="produto.produto"
+        class="po-xl-6 po-md-6 po-lg-6 po-sm-12"
+        p-label="Nome do produto"
+        p-focus="true"
+        p-error-pattern="Campo obrigatório"
+        p-maxlength="5"
+        name="nomeDoProduto"
+        p-disabled="true"
+        p-placeholder="Informe o nome"
+        t-required="true" >
+      </po-input>
+  
+      <po-number
+        [(ngModel)]="produto.quantidade"
+        class="po-xl-6 po-md-6 po-lg-6 po-sm-12"
+        p-label="Quantidade"
+        p-focus="true"
+        p-error-pattern="Campo obrigatório"
+        p-maxlength="5"
+        name="QuantidadeDoProduto"
+        p-placeholder="apenas números"
+        t-required="true" >
+      </po-number>
+</po-modal>
+
 </po-page-default>

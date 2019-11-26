@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'fornecedores', component: FornecedoresComponent},
   { path: 'produto', component: ProdutoComponent},
   { path: 'produto/incluir', component: ProdutoIncluirComponent},
-  { path: 'produto/alterar', component: ProdutoAlterarComponent},
+  { path: 'produto/alterar', component: ProdutoAlterarComponent}
 ];
 
 @NgModule({

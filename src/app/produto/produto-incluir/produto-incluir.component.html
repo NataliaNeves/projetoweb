@@ -3,40 +3,71 @@
 [p-breadcrumb]="breadcrumb"
 p-title="Incluir o Produto">
 
-  <div class="po-row po-mt-2">
-    <po-input
-      class="po-xl-3 po-md-3 po-lg-4 po-sm-12"
-      p-label="Nome do produto"
-      p-focus="true"
-      p-error-pattern="Campo obrigatório"
-      p-maxlength="5"
-      name="nomeDoProduto"
-      p-placeholder="Informe o nome"
-      t-required="true" >
-    </po-input>
-
-    <po-number
-      class="po-ml-2 po-xl-3 po-md-3 po-lg-3 po-sm-12"
-      p-label="Quantidade"
-      p-focus="true"
-      p-error-pattern="Campo obrigatório"
-      p-maxlength="5"
-      name="QuantidadeDoProduto"
-      p-placeholder="apenas números"
-      t-required="true" >
-    </po-number>
-
-    <po-combo
-      class="po-ml-3 po-xl-4 po-md-4 po-lg-4 po-sm-12"
-      p-label="Selecione o fornecedor"
-      p-focus="true"
-      p-error-pattern="Campo obrigatório"
-      p-maxlength="5"
-      name="fornecedor"
-      p-placeholder="apenas números"
-      t-required="true" >
-    </po-combo>
-
-  </div>
+  <form [formGroup]="form">
+      <div class="po-row po-mt-2">
+        <po-input
+          class="po-xl-4 po-md-4 po-lg-4 po-sm-12"
+          p-label="Nome do produto"
+          p-focus="true"
+          p-error-pattern="Campo obrigatório"
+          p-maxlength="5"
+          name="nomeDoProduto"
+          formControlName="nome"
+          p-placeholder="Informe o nome"
+          t-required="true" >
+        </po-input>
+    
+        <po-number
+          class="po-xl-4 po-md-4 po-lg-4 po-sm-12"
+          p-label="Quantidade"
+          p-focus="true"
+          p-error-pattern="Campo obrigatório"
+          p-maxlength="5"
+          name="QuantidadeDoProduto"
+          formControlName="quantidade"
+          p-placeholder="apenas números"
+          t-required="true" >
+        </po-number>
+    
+        <po-combo
+          class="po-xl-4 po-md-4 po-lg-4 po-sm-12"
+          p-label="Fornecedor"
+          p-focus="true"
+          p-error-pattern="Campo obrigatório"
+          p-maxlength="5"
+          name="fornecedor"
+          formControlName="fornecedor"
+          p-placeholder="Selecione o fornecedor"
+          t-required="true" >
+        </po-combo>
+    
+        <po-number
+            class="po-xl-4 po-md-4 po-lg-4 po-sm-12"
+            p-label="Preço de compra"
+            p-focus="true"
+            p-error-pattern="Campo obrigatório"
+            p-maxlength="5"
+            name="precoCompra"
+            formControlName="precoCompra"
+            p-mask="9999.99"
+            p-placeholder="apenas números"
+            t-required="true" >
+        </po-number>
+    
+        <po-number
+            class="po-xl-4 po-md-4 po-lg-4 po-sm-12"
+            p-label="Preço de venda"
+            p-focus="true"
+            p-error-pattern="Campo obrigatório"
+            p-maxlength="5"
+            name="precoVenda"
+            formControlName="precoVenda"
+            p-mask="9999.99"
+            p-placeholder="apenas números"
+            t-required="true" >
+        </po-number>
+    
+      </div>
+  </form>
 
 </po-page-default>

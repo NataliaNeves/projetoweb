@@ -3,8 +3,9 @@
 [p-breadcrumb]="breadcrumb"
 p-title="Insira os itens da compra">
 
-  <div class="po-row po-mt-2">
+  <div *ngFor="let produto of produtos; let i = index" class="po-row po-mt-2">
     <po-input
+      [(ngModel)]="produto.ProductId"
       class="po-xl-3 po-md-4 po-lg-4 po-sm-12"
       p-label="Código do produto"
       p-focus="true"
@@ -16,6 +17,7 @@ p-title="Insira os itens da compra">
     </po-input>
 
     <po-input
+      [(ngModel)]="produto.Quantity"
       class="po-ml-2 po-xl-4 po-md-4 po-lg-4 po-sm-12"
       p-label="Quantidade"
       p-focus="true"
@@ -28,14 +30,14 @@ p-title="Insira os itens da compra">
 
     <po-button
       class="po-ml-2 po-mt-4"
-      (p-click)="oi"
+      (p-click)="adicionar()"
       p-icon="po-icon-plus-circle"
       p-type="link" >
     </po-button>
 
     <po-button
       class="po-ml-2 po-mt-4"
-      (p-click)="oi"
+      (p-click)="remover(i)"
       p-icon="po-icon-delete"
       p-type="link" >
     </po-button>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PoPageAction, PoBreadcrumb } from '@portinari/portinari-ui';
+import { PoPageAction, PoBreadcrumb, PoNotificationService } from '@portinari/portinari-ui';
+import { IProduto } from '../produto/produto-incluir/produto-incluir.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-incluir-compra',
@@ -10,7 +12,7 @@ export class IncluirCompraComponent implements OnInit {
 
   public readonly actions: Array<PoPageAction> = [
     { label: 'Cancelar', url: '/home' },
-    { label: 'Salvar', action: null },
+    { label: 'Salvar', action: this.salvar.bind(this) },
   ];
 
   public readonly breadcrumb: PoBreadcrumb = {
@@ -20,9 +22,42 @@ export class IncluirCompraComponent implements OnInit {
     ]
   };
 
-  constructor() { }
+  public produtos = [{
+    ProductId: '',
+    Quantity: 0
+  }];
+
+  constructor(
+    private http: HttpClient,
+    public poNotification: PoNotificationService
+  ) { }
 
   ngOnInit() {
+  }
+
+  salvar() {
+    const compra = {
+      ExchangeTypeId: 2,
+      Date: new Date(),
+      ExchangeProducts: this.produtos
+    };
+
+    this.http.post('https://localhost:44369/api/Exchange/', compra).subscribe(() => {
+      this.poNotification.success('Compra incluída com sucesso!');
+    }, (erro) => {
+      this.poNotification.error(erro);
+    });
+  }
+
+  adicionar() {
+    this.produtos.push({
+      ProductId: '',
+      Quantity: 0
+    });
+  }
+
+  remover(index) {
+    this.produtos.splice(index, 1);
   }
 
 }

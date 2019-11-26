@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PoPageAction, PoBreadcrumb } from '@portinari/portinari-ui';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-fornecedores',
@@ -9,8 +10,8 @@ import { PoPageAction, PoBreadcrumb } from '@portinari/portinari-ui';
 export class FornecedoresComponent implements OnInit {
 
   public readonly actions: Array<PoPageAction> = [
-    { label: 'Cancelar', url: '/home' },
-    { label: 'Salvar', action: null },
+    { label: 'Salvar', action: this.salvar.bind(this) },
+    { label: 'Cancelar', url: '/home' }
   ];
 
   public readonly breadcrumb: PoBreadcrumb = {
@@ -20,9 +21,21 @@ export class FornecedoresComponent implements OnInit {
     ]
   };
 
-  constructor() { }
+  public nome = '';
+
+  constructor(
+    public http: HttpClient
+  ) { }
 
   ngOnInit() {
+  }
+
+  salvar() {
+
+    const fornecedor = {
+      nome: this.nome
+    }
+    this.http.post('https://localhost:44369/api/Provider,',fornecedor).subscribe(() => {})
   }
 
 }
