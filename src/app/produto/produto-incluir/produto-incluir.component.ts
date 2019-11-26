@@ -50,10 +50,10 @@ export class ProdutoIncluirComponent implements OnInit {
       quantidade: this.quantidade,
       precoCompra: this.precoCompra,
       precoVenda: this.precoVenda
-      
+
     }
 
-    this.http.post('https://localhost:5000/api/produto,', incluirProduto).subscribe(() => {
+    this.http.post('http://localhost:5000/api/produto', incluirProduto).subscribe(() => {
       this.poNotification.success('Produto incluído com sucesso!');
       this.router.navigateByUrl('/produto');
     }, (erro) => {

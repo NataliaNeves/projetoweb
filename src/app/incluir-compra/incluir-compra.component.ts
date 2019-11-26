@@ -43,7 +43,7 @@ export class IncluirCompraComponent implements OnInit {
 
     console.log(JSON.stringify(compra));
 
-    this.http.post('https://localhost:5000/api/compra', compra).subscribe(() => {
+    this.http.post('http://localhost:5000/api/compra', compra).subscribe(() => {
       this.poNotification.success('Compra incluída com sucesso!');
     }, (erro) => {
       this.poNotification.error(erro);

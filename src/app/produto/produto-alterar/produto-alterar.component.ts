@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PoPageAction, PoBreadcrumb, PoTableColumn, PoTableAction, PoModalComponent, PoModalAction, PoNotificationService } from '@portinari/portinari-ui';
+import {
+  PoPageAction,
+  PoBreadcrumb, PoTableColumn, PoTableAction, PoModalComponent, PoModalAction, PoNotificationService } from '@portinari/portinari-ui';
 import { Router } from '@angular/router';
 import { ProdutoIncluir } from '../produto-incluir/produto-incluir.entity';
 import { IProduto } from '../produto-incluir/produto-incluir.interface';
@@ -82,7 +84,7 @@ export class ProdutoAlterarComponent implements OnInit {
       quantidade: this.produto.quantidade
     }
 
-    this.http.put(`https://localhost:5000/api/produto/${valorAlteracao.id}/alterar`, valorAlteracao).subscribe(() => {
+    this.http.put(`http://localhost:5000/api/produto/${valorAlteracao.id}/alterar`, valorAlteracao).subscribe(() => {
       this.poNotification.success('Produto alterado com sucesso!');
       this.modal.close();
     }, (erro) => {
@@ -92,7 +94,7 @@ export class ProdutoAlterarComponent implements OnInit {
   }
 
   deletar(row) {
-    this.http.delete(`https://localhost:5000/api/produto/${row.codigo}/excluir`).subscribe(() => {
+    this.http.delete(`http://localhost:5000/api/produto/${row.codigo}/excluir`).subscribe(() => {
       this.estoqueService.getItems().subscribe((produtos) => {
         this.poNotification.success('Produto deletado com sucesso!');
         this.items = produtos;

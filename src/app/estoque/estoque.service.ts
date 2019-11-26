@@ -13,8 +13,8 @@ export class EstoqueService {
   ) {}
   getColumns(): Array<PoTableColumn> {
     return [
-      { property: 'codigo', label: 'Código', type: 'number'},
-      { property: 'produto', label: 'Produto', type: 'string' },
+      { property: 'id', label: 'Código', type: 'number'},
+      { property: 'nome', label: 'Produto', type: 'string' },
       { property: 'fornecedor', label: 'Fornecedor', type: 'string' },
       { property: 'quantidade', label: 'Quantidade', type: 'number' }
     ];
@@ -22,7 +22,7 @@ export class EstoqueService {
 
   getItems(): Observable<Array<ProdutoIncluir>> {
 
-  return this.http.get<Array<ProdutoIncluir>>('https://localhost:44369/api/produto');
+  return this.http.get<Array<ProdutoIncluir>>('http://localhost:5000/api/estoque');
   }
 
 }

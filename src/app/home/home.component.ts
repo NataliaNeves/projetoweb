@@ -22,14 +22,14 @@ export class HomeComponent implements OnInit {
   ngOnInit() {}
 
   valorTotalMes() {
-    this.http.get('https://localhost:44369/api/Exchange/GetMonthProfit').subscribe((lucro: number) => {
-      this.lucroMes = lucro;
-    })
+    this.http.get('http://localhost:5000/api/compra/totalmes').subscribe((lucro: any) => {
+      this.lucroMes = lucro.valorTotal;
+    });
   }
 
-  exportAsXLSX():void {
+  exportAsXLSX() {
 
-    let data = [
+    const data = [
       {
         codigo: 1200,
         produto: 'Rice',
