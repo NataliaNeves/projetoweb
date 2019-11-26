@@ -23,8 +23,8 @@ export class IncluirCompraComponent implements OnInit {
   };
 
   public produtos = [{
-    ProductId: '',
-    Quantity: 0
+    idProduto: '',
+    quantidade: 0
   }];
 
   constructor(
@@ -37,12 +37,13 @@ export class IncluirCompraComponent implements OnInit {
 
   salvar() {
     const compra = {
-      ExchangeTypeId: 2,
-      Date: new Date(),
-      ExchangeProducts: this.produtos
+      data: new Date().toISOString(),
+      itens: this.produtos
     };
 
-    this.http.post('https://localhost:44369/api/Exchange/', compra).subscribe(() => {
+    console.log(JSON.stringify(compra));
+
+    this.http.post('https://localhost:5000/api/compra', compra).subscribe(() => {
       this.poNotification.success('Compra incluída com sucesso!');
     }, (erro) => {
       this.poNotification.error(erro);
@@ -51,8 +52,8 @@ export class IncluirCompraComponent implements OnInit {
 
   adicionar() {
     this.produtos.push({
-      ProductId: '',
-      Quantity: 0
+      idProduto: '',
+      quantidade: 0
     });
   }
 

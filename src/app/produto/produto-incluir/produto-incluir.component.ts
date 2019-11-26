@@ -14,28 +14,10 @@ import { IProduto } from './produto-incluir.interface';
 })
 export class ProdutoIncluirComponent implements OnInit {
 
-  get getNome() {
-    return this.form.get('nome').value;
-  }
-  get getQuantidade() {
-    return this.form.get('quantidade').value;
-  }
-  get getFornecedor() {
-    return this.form.get('fornecedor').value;
-  }
-  get getVenda() {
-    return this.form.get('precoVenda').value;
-  }
-  get getCompra() {
-    return this.form.get('precoCompra').value;
-  }
-
-  form: FormGroup = new FormGroup({
-    nome: new FormControl(),
-    quantidade: new FormControl(),
-    precoCompra: new FormControl(),
-    precoVenda: new FormControl()
-  });
+  public nome = '';
+  public quantidade = null;
+  public precoCompra = null;
+  public precoVenda = null;
 
   public readonly actions: Array<PoPageAction> = [
     { label: 'Salvar', action: this.save.bind(this) },
@@ -62,17 +44,16 @@ export class ProdutoIncluirComponent implements OnInit {
 
   save() {
 
-    const incluirProduto: IProduto = {
+    const incluirProduto: ProdutoIncluir = {
 
-      ProviderId: null,
-      Name: this.getNome(),
-      Quantity: this.getQuantidade(),
-      PurchasePrice: this.getCompra(),
-      SellPrice: this.getVenda()
+      nome: this.nome,
+      quantidade: this.quantidade,
+      precoCompra: this.precoCompra,
+      precoVenda: this.precoVenda
       
     }
 
-    this.http.post('https://localhost:44369/api/Product,', incluirProduto).subscribe(() => {
+    this.http.post('https://localhost:5000/api/produto,', incluirProduto).subscribe(() => {
       this.poNotification.success('Produto incluído com sucesso!');
       this.router.navigateByUrl('/produto');
     }, (erro) => {

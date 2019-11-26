@@ -35,7 +35,7 @@ export class FornecedoresComponent implements OnInit {
     const fornecedor = {
       nome: this.nome
     }
-    this.http.post('https://localhost:44369/api/Provider,',fornecedor).subscribe(() => {})
+    this.http.post('https://localhost:44369/api/fornecedor,',fornecedor).subscribe(() => {})
   }
 
 }

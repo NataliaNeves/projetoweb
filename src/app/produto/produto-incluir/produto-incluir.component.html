@@ -3,7 +3,6 @@
 [p-breadcrumb]="breadcrumb"
 p-title="Incluir o Produto">
 
-  <form [formGroup]="form">
       <div class="po-row po-mt-2">
         <po-input
           class="po-xl-4 po-md-4 po-lg-4 po-sm-12"
@@ -12,7 +11,7 @@ p-title="Incluir o Produto">
           p-error-pattern="Campo obrigatório"
           p-maxlength="5"
           name="nomeDoProduto"
-          formControlName="nome"
+          [(ngModel)]="nome"
           p-placeholder="Informe o nome"
           t-required="true" >
         </po-input>
@@ -24,7 +23,7 @@ p-title="Incluir o Produto">
           p-error-pattern="Campo obrigatório"
           p-maxlength="5"
           name="QuantidadeDoProduto"
-          formControlName="quantidade"
+          [(ngModel)]="quantidade"
           p-placeholder="apenas números"
           t-required="true" >
         </po-number>
@@ -36,7 +35,7 @@ p-title="Incluir o Produto">
           p-error-pattern="Campo obrigatório"
           p-maxlength="5"
           name="fornecedor"
-          formControlName="fornecedor"
+          [(ngModel)]="fornecedor"
           p-placeholder="Selecione o fornecedor"
           t-required="true" >
         </po-combo>
@@ -48,7 +47,7 @@ p-title="Incluir o Produto">
             p-error-pattern="Campo obrigatório"
             p-maxlength="5"
             name="precoCompra"
-            formControlName="precoCompra"
+            [(ngModel)]="precoCompra"
             p-mask="9999.99"
             p-placeholder="apenas números"
             t-required="true" >
@@ -61,13 +60,12 @@ p-title="Incluir o Produto">
             p-error-pattern="Campo obrigatório"
             p-maxlength="5"
             name="precoVenda"
-            formControlName="precoVenda"
+            [(ngModel)]="precoVenda"
             p-mask="9999.99"
             p-placeholder="apenas números"
             t-required="true" >
         </po-number>
     
       </div>
-  </form>
 
 </po-page-default>

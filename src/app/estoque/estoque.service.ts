@@ -22,49 +22,7 @@ export class EstoqueService {
 
   getItems(): Observable<Array<ProdutoIncluir>> {
 
-  //return this.http.get<Array<ProdutoIncluir>>('https://localhost:44369/api/{entidade}/');
-    return of([
-      {
-        codigo: 1200,
-        produto: 'Rice',
-        fornecedor: 'Angeloni',
-        quantidade: 3,
-        precoCompra: 2.99,
-        precoVenda: 8.99
-      },
-      {
-        codigo: 1355,
-        produto: 'Margarine',
-        fornecedor: 'Giassi',
-        quantidade: 1,
-        precoCompra: 2.99,
-        precoVenda: 8.99
-      },
-      {
-        codigo: 1496,
-        produto: 'Wheat flour',
-        fornecedor: 'Walmart',
-        quantidade: 5,
-        precoCompra: 2.99,
-        precoVenda: 8.99
-      },
-      {
-        codigo: 1712,
-        produto: 'Milk',
-        fornecedor: 'Carrefour',
-        quantidade: 10,
-        precoCompra: 2.99,
-        precoVenda: 8.99
-      },
-      {
-        codigo: 1881,
-        produto: 'Oil',
-        fornecedor: 'Carrefour',
-        quantidade: 1,
-        precoCompra: 2.99,
-        precoVenda: 8.99
-      }
-    ]);
+  return this.http.get<Array<ProdutoIncluir>>('https://localhost:44369/api/produto');
   }
 
 }

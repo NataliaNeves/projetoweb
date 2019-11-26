@@ -5,7 +5,7 @@ p-title="Insira os itens da compra">
 
   <div *ngFor="let produto of produtos; let i = index" class="po-row po-mt-2">
     <po-input
-      [(ngModel)]="produto.ProductId"
+      [(ngModel)]="produto.idProduto"
       class="po-xl-3 po-md-4 po-lg-4 po-sm-12"
       p-label="Código do produto"
       p-focus="true"
@@ -17,7 +17,7 @@ p-title="Insira os itens da compra">
     </po-input>
 
     <po-input
-      [(ngModel)]="produto.Quantity"
+      [(ngModel)]="produto.quantidade"
       class="po-ml-2 po-xl-4 po-md-4 po-lg-4 po-sm-12"
       p-label="Quantidade"
       p-focus="true"

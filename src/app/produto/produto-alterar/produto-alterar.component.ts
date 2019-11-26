@@ -77,17 +77,12 @@ export class ProdutoAlterarComponent implements OnInit {
 
   salvar() {
 
-    const valorAlteracao: IProduto = {
-  
-      ProviderId: this.produto['codigo'],
-      Name: this.produto.produto,
-      Quantity: this.produto.quantidade,
-      PurchasePrice: this.produto['precoCompra'],
-      SellPrice: this.produto['precoVenda']
-    
+    const valorAlteracao = {
+      id: this.produto['codigo'],
+      quantidade: this.produto.quantidade
     }
 
-    this.http.put('https://localhost:44369/api/Product', valorAlteracao).subscribe(() => {
+    this.http.put(`https://localhost:5000/api/produto/${valorAlteracao.id}/alterar`, valorAlteracao).subscribe(() => {
       this.poNotification.success('Produto alterado com sucesso!');
       this.modal.close();
     }, (erro) => {
@@ -97,7 +92,7 @@ export class ProdutoAlterarComponent implements OnInit {
   }
 
   deletar(row) {
-    this.http.delete(`https://localhost:44369/api/{Product}/${row.codigo}`).subscribe(() => {
+    this.http.delete(`https://localhost:5000/api/produto/${row.codigo}/excluir`).subscribe(() => {
       this.estoqueService.getItems().subscribe((produtos) => {
         this.poNotification.success('Produto deletado com sucesso!');
         this.items = produtos;
