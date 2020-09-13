@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {
-  PoPageAction,
-  PoBreadcrumb, PoTableColumn, PoTableAction, PoModalComponent, PoModalAction, PoNotificationService } from '@portinari/portinari-ui';
-import { Router } from '@angular/router';
-import { ProdutoIncluir } from '../produto-incluir/produto-incluir.entity';
-import { IProduto } from '../produto-incluir/produto-incluir.interface';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import {
+  PoBreadcrumb, PoModalAction, PoModalComponent, PoNotificationService, PoPageAction,
+  PoTableAction, PoTableColumn
+} from '@portinari/portinari-ui';
 import { EstoqueService } from '../../estoque/estoque.service';
 
 
@@ -17,12 +16,13 @@ import { EstoqueService } from '../../estoque/estoque.service';
 })
 export class ProdutoAlterarComponent implements OnInit {
 
-  @ViewChild('modal', {static: false})
+  @ViewChild('modal', { static: false })
   public modal: PoModalComponent;
 
   public produto = {
     produto: '',
-    quantidade: 0
+    quantidade: 0,
+    codigo: 0
   };
 
   close: PoModalAction = {
@@ -72,7 +72,7 @@ export class ProdutoAlterarComponent implements OnInit {
   }
 
   abrirModal(row) {
-    
+
     this.produto = row;
     this.modal.open();
   }
@@ -80,9 +80,9 @@ export class ProdutoAlterarComponent implements OnInit {
   salvar() {
 
     const valorAlteracao = {
-      id: this.produto['codigo'],
+      id: this.produto.codigo,
       quantidade: this.produto.quantidade
-    }
+    };
 
     this.http.put(`http://localhost:5000/api/produto/${valorAlteracao.id}/alterar`, valorAlteracao).subscribe(() => {
       this.poNotification.success('Produto alterado com sucesso!');
@@ -93,7 +93,7 @@ export class ProdutoAlterarComponent implements OnInit {
 
   }
 
-  deletar(row) {
+  deletar(row: {codigo: string}) {
     this.http.delete(`http://localhost:5000/api/produto/${row.codigo}/excluir`).subscribe(() => {
       this.estoqueService.getItems().subscribe((produtos) => {
         this.poNotification.success('Produto deletado com sucesso!');
@@ -104,7 +104,7 @@ export class ProdutoAlterarComponent implements OnInit {
     });
   }
 
-  isUndelivered(row, index: number) {
+  isUndelivered(row: {status: string}, index: number) {
     return row.status !== 'delivered';
   }
 

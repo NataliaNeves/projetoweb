@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { PoPageAction, PoBreadcrumb, PoNotificationService } from '@portinari/portinari-ui';
-import { IProduto } from '../produto/produto-incluir/produto-incluir.interface';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { PoBreadcrumb, PoNotificationService, PoPageAction } from '@portinari/portinari-ui';
 
 @Component({
   selector: 'app-incluir-compra',
@@ -41,8 +40,6 @@ export class IncluirCompraComponent implements OnInit {
       itens: this.produtos
     };
 
-    console.log(JSON.stringify(compra));
-
     this.http.post('http://localhost:5000/api/compra', compra).subscribe(() => {
       this.poNotification.success('Compra incluída com sucesso!');
     }, (erro) => {
@@ -57,7 +54,7 @@ export class IncluirCompraComponent implements OnInit {
     });
   }
 
-  remover(index) {
+  remover(index: number) {
     this.produtos.splice(index, 1);
   }
 

@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { ExcelService } from '../excel.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [ ExcelService ]
+  providers: [ExcelService]
 })
 export class HomeComponent implements OnInit {
 
@@ -14,12 +14,12 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public http: HttpClient,
-    private excelService:ExcelService
-  ) { 
+    private excelService: ExcelService
+  ) {
     this.valorTotalMes();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   valorTotalMes() {
     this.http.get('http://localhost:5000/api/compra/totalmes').subscribe((lucro: any) => {
@@ -76,6 +76,6 @@ export class HomeComponent implements OnInit {
     //   data = compra;
     // });
     this.excelService.exportAsExcelFile(data, 'sample');
- }
+  }
 
 }

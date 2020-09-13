@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { PoPageAction, PoBreadcrumb, PoNotificationService } from '@portinari/portinari-ui';
-import { FormGroup, FormControl } from '@angular/forms';
-import { ProdutoIncluir } from './produto-incluir.entity';
 import { HttpClient } from '@angular/common/http';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IProduto } from './produto-incluir.interface';
+import { PoBreadcrumb, PoNotificationService, PoPageAction } from '@portinari/portinari-ui';
+import { ProdutoIncluir } from './produto-incluir.entity';
 
 @Component({
   selector: 'app-produto-incluir',
@@ -46,14 +43,12 @@ export class ProdutoIncluirComponent implements OnInit {
   save() {
 
     const incluirProduto: ProdutoIncluir = {
-
       nome: this.nome,
       fornecedor: this.fornecedor,
       quantidade: this.quantidade,
       precoCompra: this.precoCompra,
       precoVenda: this.precoVenda
-
-    }
+    };
 
     this.http.post('http://localhost:5000/api/produto', incluirProduto).subscribe(() => {
       this.poNotification.success('Produto incluído com sucesso!');

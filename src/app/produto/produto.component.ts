@@ -28,15 +28,11 @@ export class ProdutoComponent implements OnInit {
   }
 
   navegar() {
-
-    this.router.navigateByUrl('/produto/incluir')
-
+    this.router.navigateByUrl('/produto/incluir');
   }
 
   navegarAlterar() {
-
-    this.router.navigateByUrl('/produto/alterar')
-
+    this.router.navigateByUrl('/produto/alterar');
   }
 
 }

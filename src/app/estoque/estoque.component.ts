@@ -36,7 +36,7 @@ export class EstoqueComponent implements OnInit {
     });
   }
 
-  isUndelivered(row, index: number) {
+  isUndelivered(row: {status: string}, index: number) {
     return row.status !== 'delivered';
   }
 
